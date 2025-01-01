@@ -14,7 +14,7 @@ To set up this project locally, follow these steps:
 ### 1. Clone the repository:
 Clone the repository to your local machine and navigate into the project folder:
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/herrickfung/4m_data_code.git
 cd 4m_data_code
 ```
 
