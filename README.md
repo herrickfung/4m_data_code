@@ -20,15 +20,6 @@ Overall, our results reveal a startling similarity between the effects of four v
 and a prominent difference with a fifth manipulation. These results may allow us to predict how future, 
 yet untested manipulations would affect accuracy and confidence.
 
-
----
-
-## Table of Contents
-
-1. [Installation](#installation)
-2. [Requirements](#requirements)
-
-
 ---
 
 ## Installation
@@ -51,10 +42,13 @@ cd your-repo-name
 6. pingouin==0.5.3
 7. rpy2==3.5.7
 
-Additionally, R is required for certain analyses. You can download it from:
+Additionally, R 4.3 is required for certain analyses. You can download it from:
 https://cran.r-project.org
 To run the analysis, the following R packages are required:
 1. afex
+
+```R
+install.packages("afex")
 
 ```bash
 pip install -r requirements.txt
