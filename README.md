@@ -5,6 +5,8 @@
 
 This project examines the similarities and differences between five different stimulus manipulations across two experiments on accuracy and confidence. 
 
+These results is published in XXX.
+
 ---
 
 ## Installation
