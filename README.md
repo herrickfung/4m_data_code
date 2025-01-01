@@ -45,12 +45,12 @@ cd your-repo-name
 To install these dependencies, 
 ```bash
 pip install -r requirements.txt
+```
 
 Additionally, R 4.3 is required for certain analyses. You can download it from:
 https://cran.r-project.org
 To run the analysis, the following R packages are required:
 1. afex
-
 ```R
 install.packages("afex")
 ```
