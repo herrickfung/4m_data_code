@@ -2,6 +2,7 @@
 
 
 **Project Description**:  
+
 Visual stimuli can vary in multiple dimensions that affect accuracy and confidence in a perceptual decision-making task. 
 However, previous studies have typically included just one or at most two manipulations, 
 leaving it unclear how a wider set of manipulations may relate to each other. 
@@ -25,10 +26,8 @@ yet untested manipulations would affect accuracy and confidence.
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Requirements](#requirements)
-4. [Contributing](#contributing)
-5. [License](#license)
+2. [Requirements](#requirements)
+
 
 ---
 
