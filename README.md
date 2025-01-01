@@ -43,6 +43,14 @@ cd your-repo-name
 ```
 
 ### 2. Install dependencies:
+1. Python3.9
+2. R 4.3
+3. scipy==1.11.4
+4. matplotlib==3.6.3
+5. numpy==1.23.5
+6. pandas==1.5.3
+7. pingouin==0.5.3
+8. rpy2==3.5.7
 
 ```bash
 pip install -r requirements.txt
