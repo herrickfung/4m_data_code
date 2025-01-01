@@ -2,7 +2,8 @@
 
 
 **Project Description**:  
-This project examine the similarities and differences between five different stimulus manipulations across two experiments on accuracy and confidence. 
+
+This project examines the similarities and differences between five different stimulus manipulations across two experiments on accuracy and confidence. 
 
 ---
 
