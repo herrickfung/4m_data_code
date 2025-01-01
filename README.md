@@ -42,6 +42,10 @@ cd your-repo-name
 6. pingouin==0.5.3
 7. rpy2==3.5.7
 
+To install these dependencies, 
+```bash
+pip install -r requirements.txt
+
 Additionally, R 4.3 is required for certain analyses. You can download it from:
 https://cran.r-project.org
 To run the analysis, the following R packages are required:
@@ -49,6 +53,6 @@ To run the analysis, the following R packages are required:
 
 ```R
 install.packages("afex")
+```
 
-```bash
-pip install -r requirements.txt
+
