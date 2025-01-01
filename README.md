@@ -40,4 +40,6 @@ To run the analysis, the following R packages are required:
 install.packages("afex")
 ```
 
+### 3. Contents:
+The lightly processed raw data from both experiments is in data/
 
