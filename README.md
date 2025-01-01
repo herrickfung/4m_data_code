@@ -41,5 +41,15 @@ install.packages("afex")
 ```
 
 ### 3. Contents:
-The lightly processed raw data from both experiments is in data/
+
+The repository includes the following structure:
+
+- **`data_code/data/`**: Contains the lightly processed raw data from both experiments. These files are in a format ready for analysis.
+
+- **`data_code/function/`**: Contains helper functions for the analysis scripts.
+
+- **`data_code/results/`**: Contains the processed data, statistical results, and all figures in the article produced by the analysis script.
+
+- **`requirements.txt`**: Lists all the required Python dependencies for the project.
+
 
