@@ -40,3 +40,9 @@ Clone the repository to your local machine and navigate into the project folder:
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
+```
+
+### 2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
