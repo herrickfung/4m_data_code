@@ -50,6 +50,9 @@ The repository includes the following structure:
 
 - **`data_code/results/`**: Contains the processed data, statistical results, and all figures in the article produced by the analysis script.
 
+- **`data_code/analyze_expt_1.py`**: Analysis script for Experiment 1.
+- **`data_code/analyze_expt_2.py`**: Analysis script for Experiment 2.
+
 - **`requirements.txt`**: Lists all the required Python dependencies for the project.
 
 
