@@ -44,13 +44,17 @@ cd your-repo-name
 
 ### 2. Install dependencies:
 1. Python3.9
-2. R 4.3
-3. scipy==1.11.4
-4. matplotlib==3.6.3
-5. numpy==1.23.5
-6. pandas==1.5.3
-7. pingouin==0.5.3
-8. rpy2==3.5.7
+2. scipy==1.11.4
+3. matplotlib==3.6.3
+4. numpy==1.23.5
+5. pandas==1.5.3
+6. pingouin==0.5.3
+7. rpy2==3.5.7
+
+Additionally, R is required for certain analyses. You can download it from:
+https://cran.r-project.org
+To run the analysis, the following R packages are required:
+1. afex
 
 ```bash
 pip install -r requirements.txt
