@@ -42,7 +42,7 @@ To run the analysis, the following R packages are required:
 install.packages("afex")
 ```
 
-## 3. Contents:
+## Contents:
 
 The repository includes the following structure:
 
