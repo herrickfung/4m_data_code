@@ -63,17 +63,22 @@ The repository includes the following structure:
 
 ## Data Column README
 
-| Column Name         | Description                                                                                       | Example        |
-|---------------------|---------------------------------------------------------------------------------------------------|----------------|
-| **subject_ID**       | Unique identifier for each participant in the experiment. All trials belonging to the same subject will share the same subject_ID. | `1`            |
-| **trial_no**         | Sequential number of the trial within a subject. This helps to track the order of the trials.      | `1`            |
-| **stim_condition**   | The experimental condition under which the stimulus was presented. This variable categorizes the type of stimulus shown during the trial. | `4`            |
-| **answer**           | The participant's response to the stimulus, coded as a numerical value representing the choice the participant made in response to the stimulus. | `0`            |
-| **percept_resp**     | The participant’s perceptual response to the stimulus, also coded numerically. This can reflect how the participant interpreted or perceived the stimulus. | `1`            |
-| **conf_resp**        | The confidence response, coded numerically, indicating the participant’s confidence level in their answer. Higher values often indicate higher confidence. | `2`            |
-| **correct**          | Indicates whether the participant’s response was correct. A value of `1` means correct, and `0` means incorrect. | `0`            |
-| **percept_rt**       | The reaction time (RT) for the perceptual response, measured in milliseconds. This shows how long it took the participant to respond to the stimulus. | `541`          |
-| **conf_rt**          | The reaction time (RT) for the confidence response, measured in milliseconds. This reflects how long it took the participant to decide on their confidence level after responding perceptually. | `2267`         |
-| **stim_size**        | The size of the stimulus presented during the trial, coded as a numerical value (could represent dimensions like width or height in some unit). | `150`          |
-| **stim_dur**         | The duration in milliseconds for which the stimulus was presented. This indicates how long the stimulus remained on screen. | `500`          |
-| **stim_contrast**    | The contrast level of the stimulus, typically ranging from `0` (no co
+| Column Name         | Description                                                                                       |
+|---------------------|---------------------------------------------------------------------------------------------------|
+| **subject_ID**       | Unique identifier for each participant in the experiment. All trials belonging to the same subject will share the same subject_ID. |
+| **trial_no**         | Sequential number of the trial within a subject.       |
+| **stim_condition** / **condition**  | The experimental condition coded numerically.  |
+| **text_stim_condition** | A textual description of the experimental condition associated with the trial. |
+| **binary_condition** | Binary conversion of the experimental condition for Experiment 2. Each digit will refer to size, spatial frequency, noise, and tilt offset, respectively; 0 is Easy, 1 is Hard. E.g. 1100 would indicate hard setting for size and spatial frequency, and easy setting for noise and tilt offset.|
+| **answer**           | The stimulus tilt coded numerically. 1 = tilt more to left, 0 = tilt more to right. |
+| **percept_resp**     | The subject’s perceptual response to the stimulus. 1 = tilt more to left, 0 = tilt more to right. |
+| **conf_resp**        | The subject's confidence response to the stimulus, ranged from 1 to 4. 1 = low confidence, 4 = high confidence |
+| **correct**          | Accuracy of the subject's perceptual response. 1 = correct, 0 = incorrect. |
+| **percept_rt**       | The reaction time (RT) for the perceptual response, measured in milliseconds. |
+| **conf_rt**          | The reaction time (RT) for the confidence response, measured in milliseconds.  |
+| **stim_size**        | The size of the stimulus presented during the trial, in pixel value. |
+| **stim_dur**         | The duration in milliseconds for which the stimulus was presented.  |
+| **stim_sf**          | The spatial frequency level of the stimulus, in cycles per degree. |
+| **stim_contrast**    | The noise contrast level of the stimulus, ranging from 0 to 1, 0 = no noise, 1 = complete noise |
+| **stim_tilt_diff**   | The tilt offset level of the stimulus, in degree. |
+
