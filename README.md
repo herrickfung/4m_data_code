@@ -86,16 +86,14 @@ The repository includes the following structure:
 
 | Column Name       | Description                                                                                       |
 |-------------------|---------------------------------------------------------------------------------------------------|
-| **subj_no**       | Unique identifier for each participant in the experiment. All trials belonging to the same subject will share the same subject_ID. |
-| **stim_cond**     | Sequential number of the trial within a subject.       |
-| **percept_acc**   | The experimental condition coded numerically.  |
-| **d-prime**       | A textual description of the experimental condition associated with the trial. |
-| **c**             | Binary conversion of the experimental condi |
-| **beta**          | The stimulus tilt coded numerically. 1 = tilt more to left, 0 = tilt more to right. |
-| **conf_resp**     | The subject’s perceptual response to the stimulus. 1 = tilt more to left, 0 = tilt more to right. |
-| **c_conf_resp**   | The subject's confidence response to the stimulus, ranged from 1 to 4. 1 = low confidence, 4 = high confidence |
-| **ic_conf_resp**  | Accuracy of the subject's perceptual response. 1 = correct, 0 = incorrect. |
-| **percept_rt**    | The reaction time (RT) for the perceptual response, measured in milliseconds. |
-| **conf_rt**       | The reaction time (RT) for the confidence response, measured in milliseconds.  |
-| **threshold**     | The size of the stimulus presented during the trial, in pixel value. |
-
+| **subj_no**       | Subject unique identifier. |
+| **stim_cond**     | The experimental condition.        |
+| **percept_acc**   | Average accuracy for the perceptual response.  |
+| **d-prime**       | d' |
+| **c**             | Decision criterion |
+| **beta**          | Decision bias |
+| **conf_resp**     | Average confidence response. |
+| **c_conf_resp**   | Average confidence response for correct trials. |
+| **ic_conf_resp**  | Average confidence response for incorrect trials. |
+| **percept_rt**    | The average reaction time (RT) for the perceptual response, measured in milliseconds. |
+| **conf_rt**       | The average reaction time (RT) for the confidence response, measured in milliseconds.  |
