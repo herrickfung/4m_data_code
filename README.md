@@ -1,7 +1,7 @@
 # Data and codes for "Similarities and differences in the effects of different stimulus manipulations on accuracy and confidence".
 
 
-## Project Description:  
+## Project Description
 
 This project examines the similarities and differences between five different stimulus manipulations across two experiments on accuracy and confidence. 
 
@@ -42,7 +42,9 @@ To run the analysis, the following R packages are required:
 install.packages("afex")
 ```
 
-## Contents:
+---
+
+## Contents
 
 The repository includes the following structure:
 
