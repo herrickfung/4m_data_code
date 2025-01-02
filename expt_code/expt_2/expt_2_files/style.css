@@ -1,0 +1,15 @@
+body {
+    background-color: grey;
+}
+
+.jspsych-display-element {
+    font-size: 28;
+    color: #000000;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.image-row {
+  display: flex;
+  justify-content: space-between; /* this will add equal space between each image */
+}
