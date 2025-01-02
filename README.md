@@ -57,6 +57,8 @@ The repository includes the following structure:
 - **`data_code/analyze_expt_1.py`**: Analysis script for Experiment 1.
 - **`data_code/analyze_expt_2.py`**: Analysis script for Experiment 2.
 
+- **`expt_code/`**: Contains all codes for the behavioral experiments that run in a web browser, programmed in JS with jsPsych 7.3.3
+
 - **`requirements.txt`**: Lists all the required Python dependencies for the project.
 
 ---
