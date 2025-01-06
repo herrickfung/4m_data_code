@@ -36,12 +36,6 @@ warnings.filterwarnings("ignore")
 rcParams['font.family'] = 'CMU Sans Serif'
 
 
-def progress_bar(progress, total):
-    percent = 100 * (progress / float(total))
-    bar = ' ' * int(percent) + '-' * (100 - int(percent))
-    print(f"\r|{bar}| {percent:.2f}%", end="\r")
-
-
 def manage_path():
     # input
     current_path = pathlib.Path(__file__).parent.absolute()
@@ -702,14 +696,14 @@ def stat(data, path):
 def main():
     in_data_path, out_pro_path, stat_path, graph_path = manage_path()
     if run_process:
-        # read raw data
-        # if run_merge:
-        #     merge_data.merge_raw_data()
         print("\nProcessing individuals ......")
         data = read(in_data_path)
 
         # process data in different ways
+        # process all sdt measures on 16 conditions independently
         pro_data = process(data)
+        # process all sdt measures merging 8 conditions together
+        # (e.g. all size easy vs. all size hard)
         pro_8_data = merge8(data)
 
         # exclude subjects

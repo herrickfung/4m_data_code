@@ -25,11 +25,6 @@ warnings.filterwarnings("ignore")
 rcParams['font.family'] = 'CMU Sans Serif'
 
 
-def progress_bar(progress, total):
-    percent = 100 * (progress / float(total))
-    bar = ' ' * int(percent) + '-' * (100 - int(percent))
-    print(f"\r|{bar}| {percent:.2f}%", end="\r")
-
 
 def manage_path():
     # input
@@ -542,6 +537,7 @@ def main():
         data = read(in_data_path)
         pro_data = process(data)
 
+        # exclude subjects
         exclude_list = find_exclude(pro_data)
         data = exclude(data, exclude_list)
         pro_data = exclude(pro_data, exclude_list)
@@ -553,6 +549,7 @@ def main():
         print('--------------------------------------------------------------------------------')
         print('Processing Completed.')
     else:
+
         pro_data = pd.read_csv(out_pro_path)
         print("Processed data read from " + str(out_pro_path))
 
