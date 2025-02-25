@@ -254,6 +254,7 @@ def plot_MC_diff(data, path):
     plot_name = path / f'merged_conditions_difference_plot.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def plot_MC_z_transformed_diff(data, path):
@@ -380,6 +381,7 @@ def plot_MC_z_transformed_diff(data, path):
     plot_name = path / 'z_difference.png'
     fig.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def plot_MC_folded_X(data, path):
@@ -461,6 +463,7 @@ def plot_MC_folded_X(data, path):
     plot_name = path / f'merged_conditions_folded_X.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def fit_to_line(x, y):
@@ -508,6 +511,7 @@ def plot_MC_acc_conf_scatter(data, path):
     plot_name = path / 'merged_conditions_acc_conf_scatter.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def plot_MC_acc_conf_slope(data, path):
@@ -607,6 +611,7 @@ def plot_MC_acc_conf_slope(data, path):
     plot_name = path / 'merged_conditions_acc_conf_slope.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def plot_2way_ix(data, path):
@@ -740,6 +745,7 @@ def plot_2way_ix(data, path):
     plot_name = path / f'2_way_Ix_plot.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=False)
     print(plot_name)
+    plt.close()
 
 
 def graph(data, path):
