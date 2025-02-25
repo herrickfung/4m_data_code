@@ -448,9 +448,7 @@ def plot_foldedX(data, path):
         axim[i].set_title(split_plot_name[i], weight='bold', fontsize=14)
         axim[i].set_xticks([1,2,3], ['Hard', 'Medium', 'Easy'], fontsize=12)
         axim[i].set_xlim([0.5, 3.5])
-        # axim[i].set_ylim([1.5,3.2])
         axim[i].set_ylabel('Confidence', fontsize=14)
-        # axim[i].set_yticks([1,2,3,4], [1,2,3,4])
         axim[i].spines['top'].set_visible(False)
         axim[i].spines['right'].set_visible(False)
 
@@ -471,9 +469,6 @@ def plot_foldedX(data, path):
 
     y_annotate_pos = [[2.6, 2.65, 2.6, 2.65], [2.1, 2.25, 2.05, 2.5]]
     color=['green', 'red']
-    # print(m_array.mean(axis = 2))
-    # print(t_value_array)
-    # print(p_value_array)
     for feat in range(4):
         for correct in range(2):
             t_value = t_value_array[correct][feat]
