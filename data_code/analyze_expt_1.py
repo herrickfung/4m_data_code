@@ -264,6 +264,145 @@ def plot_difference(data, path):
     plot_name = path / 'difference.png'
     fig.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
+
+
+def plot_z_transform_difference(data, path):
+    # z delta d' - z delta confidence
+
+    subjs = data.subj_no.unique()
+    split_plot = [['size_low', 'size_high'],
+                  ['dur_low', 'dur_high'],
+                  ['noise_high', 'noise_low'],
+                  ['tilt_low', 'tilt_high']
+                  ]
+    measures = ['d-prime', 'conf_resp']
+    plot_data = np.empty(shape=(2, len(subjs), 4))
+
+    for m, measure in enumerate(measures):
+        for s, subj in enumerate(subjs):
+            subj_data = data[data.subj_no == subj]
+            for i in range(len(split_plot)):
+                plot_data[m][s][i] = \
+                np.average(subj_data[subj_data.exp_cond == split_plot[i][1]][measure]) - \
+                np.average(subj_data[subj_data.exp_cond == split_plot[i][0]][measure])
+
+    mean = np.mean(plot_data, axis = (1,2), keepdims=True)
+    std = np.std(plot_data, axis = (1,2), keepdims=True)
+    plot_data = (plot_data - mean) / std
+
+    label = ['Size', 'Duration', 'Noise', 'Tilt \noffset']
+    paired_t_tests = []
+
+    # compute stats for within feature, across metrics
+    for i in range(4):
+        for m in range(2):
+            for j in range(m+1, 2):
+                t_stat, p_val = ttest_rel(plot_data[m, :, i], plot_data[j, :, i])
+                bayes10 = float(pg.ttest(plot_data[m, :, i], plot_data[j, :, i], paired=True)['BF10'].values[0])
+                bayes01 = 1 / bayes10
+                paired_t_tests.append((label[i], t_stat, p_val, bayes10, bayes01))
+
+    # compute stats for cross feature on difference
+    plot_data = -np.diff(plot_data, axis=0)
+    plot_data = plot_data.squeeze()
+    cross_feat_t_tests = []
+    for i in range(4):
+        for j in range(i+1, 4):
+            t_stat, p_val = ttest_rel(plot_data[:, i], plot_data[:, j])
+            bayes10 = float(pg.ttest(plot_data[:, i], plot_data[:, j], paired=True)['BF10'].values[0])
+            bayes01 = 1 / bayes10
+            cross_feat_t_tests.append((label[i], label[j], t_stat, p_val, bayes10, bayes01))
+
+    # plot graph
+    plt.clf()
+    fig, ax = plt.subplots(1,1, layout="constrained", figsize=(6,4))
+    plate = plt.cm.get_cmap('Dark2', 8)
+    plate = [plate(0), plate(5), plate(2), plate(3)]
+    titles = ['d\' difference', 'Confidence difference']
+    x_pos = np.array([0,1,2,3])
+    buffer = [-0.25, 0.25]
+    alpha = [0.65, 0.35]
+    labels = ['d\'', 'Confidence']
+
+    avg = np.average(plot_data, axis = 0)
+    se = sem(plot_data, axis = 0)
+    ax.bar(x_pos, avg, yerr=se, color=plate, alpha = 0.5, width=0.75)
+    ax.set_xticks(x_pos, label, fontsize=14)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    for sub in range(plot_data.shape[0]):
+        x_position = x_pos - 0.25
+        ax.scatter(x_position, plot_data[sub], color=plate, alpha=1,
+                      s=5
+                      )
+        # ax.plot(x_position, plot_data[m][sub], color='k', alpha = 0.1)
+
+    x_pos = [0.2, 1.2, 2.2, 3.2]
+    y_pos = [-1, -0.8, -1.1, -0.5]
+    for i, test in enumerate(paired_t_tests):
+        print(test)
+        # Determine if p is over power 3
+        if test[2] < 1e-3:
+            power = int(np.floor(np.log10(test[2])))
+            coefficient = test[2] / (10 ** power)
+            annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+        else:
+            annotation = r"$p = {:.2f}$".format(test[2])
+
+        ax.annotate(annotation, xy=(x_pos[i], y_pos[i]),
+                      xytext=(0, 0), textcoords='offset points',
+                      ha='center', va='bottom', fontsize=6, color='black',
+                     )
+
+#         ax.plot([x_pos[i]-0.25, x_pos[i]+0.25], [y_pos, y_pos],
+#                  color='k', alpha = 0.5
+#                    )
+
+    print('--------------------------------------------------------------------------------')
+    y_pos_array = np.array([3, 4, 6, 3.5, 5.25, 4.5]) - 0.4
+    for i, test in enumerate(cross_feat_t_tests):
+        print(test)
+        x_pos = 0.5 * (label.index(test[0]) + label.index(test[1]))
+
+        # Determine if p is over power 3
+        if test[3] < 1e-3:
+            power = int(np.floor(np.log10(test[3])))
+            coefficient = test[3] / (10 ** power)
+            annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+            alpha = 1
+        else:
+            annotation = r"$p = {:.2f}$".format(test[3])
+            alpha = 0.5
+
+        ax.annotate(annotation, xy=(x_pos, y_pos_array[i]),
+                      xytext=(0, 0), textcoords='offset points',
+                      ha='center', va='bottom', fontsize=8, color='black',
+                    alpha = alpha
+                     )
+        ax.plot([label.index(test[0]), label.index(test[1])], [y_pos_array[i], y_pos_array[i]],
+                 color='k', alpha = alpha
+                   )
+
+    # plot a horizontal line at 0, y = 0
+    ax.plot([-1.25, 5.5], [0, 0], 'k', alpha=1)
+    # upper arrow on the line
+    ax.arrow(3.75, 0, 0, 0.7, head_width=0.1, head_length=0.25, width=0.025,fc='k', ec='k')
+    ax.arrow(3.75, 0, 0, -0.7, head_width=0.1, head_length=0.25, width=0.025,fc='k', ec='k')
+    ax.annotate('Larger effect on \naccuracy than confidence', xy=(3.85, 0.25), xytext=(0, 0), textcoords='offset points',
+                fontsize=8, color='black', fontweight='bold')
+    ax.annotate('Larger effect on \nconfidence than accuracy', xy=(3.85, -0.95), xytext=(0, 0), textcoords='offset points',
+                fontsize=8, color='black', fontweight='bold')
+    ax.set_xlim(-0.75, 5.5)
+
+
+    ax.set_ylabel(r"z($\Delta$d') - z($\Delta$confidence)", fontsize=14)
+    plt.suptitle('z-scored difference analysis\n', fontsize=18, fontweight='bold')
+    plot_name = path / 'z_difference.png'
+    fig.savefig(plot_name, format='png', dpi=384, transparent=True)
+    print(plot_name)
+    plt.close()
 
 
 def plot_foldedX(data, path):
@@ -375,6 +514,7 @@ def plot_acc_conf_scatter(data, path):
     label = ['Size', 'Duration', 'Noise', 'Tilt offset']
     plate = plt.cm.get_cmap('Dark2', 8)
     plate = [plate(0), plate(5), plate(2), plate(3)]
+    markers = ['o', 's', 'D', '*']
 
     for i in range(len(split_plot)):
         x = split_plot[i]
@@ -395,9 +535,9 @@ def plot_acc_conf_scatter(data, path):
         for k in range(3):
             if k != 1:
                 plt.errorbar(x_axis[k], y_axis[k], label=label[i] if k == 0 else None,
-                            color=plate[i], marker='o', zorder=2,
+                            color=plate[i], marker=markers[i], zorder=2,
                             # xerr=xerr[k], yerr=yerr[k],
-                            markersize=5, alpha=1,
+                            markersize=8, alpha=0.8,
                             )
             else:
                 plt.errorbar(x_axis[k], y_axis[k], color='black', marker='o', zorder=3,
@@ -418,6 +558,7 @@ def plot_acc_conf_scatter(data, path):
     plot_name = path / 'acc_conf_scatter.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def plot_acc_conf_slope(data, path):
@@ -513,6 +654,7 @@ def plot_acc_conf_slope(data, path):
     plot_name = path / 'acc_conf_slope.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
+    plt.close()
 
 
 def graph(data, path):
@@ -524,6 +666,9 @@ def graph(data, path):
 
     # Figure 2c
     plot_difference(data, path)
+
+    # Figure 2d
+    plot_z_transform_difference(data, path)
 
     # Figure 5
     plot_foldedX(data, path)
