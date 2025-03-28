@@ -5,7 +5,7 @@
 
 This project examines the similarities and differences between five different stimulus manipulations across two experiments on accuracy and confidence. 
 
-These results are available on [PsyArXiv](https://osf.io/preprints/psyarxiv/b7kru_v1).
+Full paper available on [PsyArXiv](https://osf.io/preprints/psyarxiv/b7kru_v1).
 
 ---
 
