@@ -5,17 +5,20 @@ analysis script for expt 2
 run_process = True
 
 # import modules
-import pathlib
 from itertools import combinations
-from scipy.stats import sem, ttest_rel, ttest_1samp
-import matplotlib.pyplot as plt
 from matplotlib import rcParams
+from scipy.stats import sem, ttest_rel, ttest_1samp
+from pymer4.models import Lmer
+import matplotlib.pyplot as plt
 import os
 import numpy as np
 import pandas as pd
 import pingouin as pg
+import pathlib
+import io
 import sys
 import warnings
+import pathlib
 
 # R-related imports for ANOVA
 import rpy2
@@ -952,6 +955,46 @@ def stat(data, path):
     print(f"Stat results save in {path}")
 
 
+def trial_level_modelling(data, path):
+    stim_man = ['size', 'spatial frequency', 'noise', 'tilt']
+    n_level = 2
+
+    for i, cond in enumerate(stim_man):
+        all_conds = [np.binary_repr(x, width=4) for x in range(16)]
+        model_data = data.copy()
+        conds = [int(x, 2) for x in all_conds if x[i] == str(0)]
+        model_data['diff'] = model_data['condition'].apply(lambda x: 0 if x in conds else 1)
+        model_data.subject_ID = model_data.subject_ID.astype(str)
+        model_data['diff'] = model_data['diff'].astype(str)
+
+        model_data['diff'] = pd.Categorical(
+            model_data['diff'],
+            categories=[str(0), str(1)],
+            ordered=False
+        )
+
+        old_out = sys.stdout
+        sys.stdout = mystdout = io.StringIO()
+
+        model = Lmer('correct ~ conf_resp * diff + (1 + conf_resp * diff | subject_ID)', 
+                     data=model_data,
+                     family='binomial',
+                     )
+        result = model.fit()
+
+        sys.stdout = old_out
+        output = mystdout.getvalue()
+
+        with open(path, "a") as f:
+            f.write(f"===== Model for {cond} =====\n")
+            f.write(output)
+            f.write(str(result))
+            f.write("\n\n")
+            f.write(str(model.coefs))
+            f.write('--------------------------------------------------------------------------------\n')
+            f.write("\n\n")
+
+
 def main():
     in_data_path, out_pro_path, stat_path, graph_path = manage_path()
     if run_process:
@@ -981,12 +1024,14 @@ def main():
         print('Processing Completed.')
 
     else:
+        data = pd.read_csv(in_data_path)
         pro_data = pd.read_csv(f'{out_pro_path}/16c_processed_data.csv')
         pro_8_data = pd.read_csv(f'{out_pro_path}/merge8_processed_data.csv')
         print("Processed data read from path")
 
     stat(pro_data, stat_path)
-    # graph(pro_data, graph_path)
+    trial_level_modelling(data, stat_path)
+    graph(pro_data, graph_path)
     graphMC(pro_8_data, graph_path)
 
     print("--------------------------------------------------------------------------------")

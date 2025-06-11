@@ -184,3 +184,175 @@ __________________________________________________________________
 3  Noise * Tilt offset     1  0  1   True       True  6.022707  28.0   two-sided  1.721652e-06  1.071e+04  0.335274
 
 
+===== Model for size =====
+boundary (singular) fit: see help('isSingular') 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*diff+(1+conf_resp*diff|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 46400	 Groups: {'subject_ID': np.float64(29.0)}
+
+Log-likelihood: -24038.715 	 AIC: 48105.430
+
+Random effects:
+
+                       Name    Var    Std
+subject_ID      (Intercept)  0.141  0.375
+subject_ID        conf_resp  0.105  0.324
+subject_ID            diff1  0.017  0.130
+subject_ID  conf_resp:diff1  0.007  0.081
+
+                    IV1              IV2   Corr
+subject_ID  (Intercept)        conf_resp -0.599
+subject_ID  (Intercept)            diff1 -0.944
+subject_ID  (Intercept)  conf_resp:diff1  0.860
+subject_ID    conf_resp            diff1  0.301
+subject_ID    conf_resp  conf_resp:diff1 -0.762
+subject_ID        diff1  conf_resp:diff1 -0.710
+
+Fixed effects:
+
+                 Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)        -0.395  -0.559   -0.231  0.084  0.674      0.572       0.794  0.402        0.364         0.442  -4.720  0.000  ***
+conf_resp           0.699   0.575    0.822  0.063  2.011      1.777       2.276  0.668        0.640         0.695  11.076  0.000  ***
+diff1               0.045  -0.077    0.167  0.062  1.046      0.926       1.182  0.511        0.481         0.542   0.719  0.472     
+conf_resp:diff1    -0.114  -0.170   -0.058  0.029  0.892      0.843       0.944  0.471        0.457         0.485  -3.988  0.000  ***
+
+                 Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci     Z-stat         P-val  Sig
+(Intercept)     -0.395097 -0.559162 -0.231032  0.083708  0.673615   0.571688    0.793714  0.402491     0.363741      0.442498  -4.719926  2.359304e-06  ***
+conf_resp        0.698596  0.574974  0.822218  0.063074  2.010927   1.777084    2.275541  0.667876     0.639910      0.694707  11.075865  1.642858e-28  ***
+diff1            0.044799 -0.077344  0.166941  0.062319  1.045817   0.925572    1.181684  0.511198     0.480674      0.541639   0.718864  4.722249e-01     
+conf_resp:diff1 -0.114273 -0.170431 -0.058115  0.028653  0.892014   0.843301    0.943542  0.471463     0.457495      0.485475  -3.988208  6.657442e-05  ***--------------------------------------------------------------------------------
+
+
+===== Model for spatial frequency =====
+Model failed to converge with max|grad| = 0.00320621 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*diff+(1+conf_resp*diff|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 46400	 Groups: {'subject_ID': np.float64(29.0)}
+
+Log-likelihood: -23986.248 	 AIC: 48000.495
+
+Random effects:
+
+                       Name    Var    Std
+subject_ID      (Intercept)  0.121  0.347
+subject_ID        conf_resp  0.124  0.352
+subject_ID            diff1  0.028  0.168
+subject_ID  conf_resp:diff1  0.012  0.111
+
+                    IV1              IV2   Corr
+subject_ID  (Intercept)        conf_resp -0.738
+subject_ID  (Intercept)            diff1 -0.436
+subject_ID  (Intercept)  conf_resp:diff1  0.347
+subject_ID    conf_resp            diff1  0.765
+subject_ID    conf_resp  conf_resp:diff1 -0.857
+subject_ID        diff1  conf_resp:diff1 -0.731
+
+Fixed effects:
+
+                 Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)        -0.351  -0.507   -0.195  0.080  0.704      0.603       0.823  0.413        0.376         0.452  -4.405  0.000  ***
+conf_resp           0.710   0.576    0.844  0.068  2.034      1.779       2.325  0.670        0.640         0.699  10.389  0.000  ***
+diff1               0.004  -0.127    0.136  0.067  1.004      0.881       1.145  0.501        0.468         0.534   0.066  0.948     
+conf_resp:diff1    -0.150  -0.213   -0.086  0.033  0.861      0.808       0.918  0.463        0.447         0.479  -4.605  0.000  ***
+
+                 Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci     Z-stat         P-val  Sig
+(Intercept)     -0.350612 -0.506629 -0.194594  0.079602  0.704257   0.602523    0.823169  0.413234     0.375984      0.451504  -4.404550  1.060035e-05  ***
+conf_resp        0.709900  0.575967  0.843832  0.068334  2.033787   1.778849    2.325261  0.670379     0.640139      0.699272  10.388628  2.793413e-25  ***
+diff1            0.004404 -0.126707  0.135514  0.066894  1.004413   0.880992    1.145126  0.501101     0.468366      0.533827   0.065831  9.475122e-01     
+conf_resp:diff1 -0.149671 -0.213373 -0.085969  0.032502  0.860991   0.807854    0.917622  0.462652     0.446858      0.478521  -4.605035  4.123964e-06  ***--------------------------------------------------------------------------------
+
+
+===== Model for noise =====
+Model failed to converge with max|grad| = 0.00267726 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*diff+(1+conf_resp*diff|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 46400	 Groups: {'subject_ID': np.float64(29.0)}
+
+Log-likelihood: -24008.726 	 AIC: 48045.453
+
+Random effects:
+
+                       Name    Var    Std
+subject_ID      (Intercept)  0.149  0.386
+subject_ID        conf_resp  0.104  0.323
+subject_ID            diff1  0.024  0.155
+subject_ID  conf_resp:diff1  0.006  0.079
+
+                    IV1              IV2   Corr
+subject_ID  (Intercept)        conf_resp -0.559
+subject_ID  (Intercept)            diff1 -0.920
+subject_ID  (Intercept)  conf_resp:diff1  0.615
+subject_ID    conf_resp            diff1  0.263
+subject_ID    conf_resp  conf_resp:diff1 -0.719
+subject_ID        diff1  conf_resp:diff1 -0.589
+
+Fixed effects:
+
+                 Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)        -0.366  -0.535   -0.198  0.086  0.693      0.586       0.821  0.409        0.369         0.451  -4.257  0.000  ***
+conf_resp           0.701   0.577    0.824  0.063  2.016      1.781       2.280  0.668        0.640         0.695  11.129  0.000  ***
+diff1               0.008  -0.119    0.136  0.065  1.008      0.888       1.146  0.502        0.470         0.534   0.129  0.897     
+conf_resp:diff1    -0.125  -0.182   -0.069  0.029  0.882      0.834       0.933  0.469        0.455         0.483  -4.361  0.000  ***
+
+                 Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci     Z-stat         P-val  Sig
+(Intercept)     -0.366110 -0.534682 -0.197537  0.086008  0.693427   0.585856    0.820749  0.409481     0.369426      0.450776  -4.256702  2.074651e-05  ***
+conf_resp        0.700896  0.577456  0.824336  0.062981  2.015557   1.781500    2.280366  0.668386     0.640482      0.695156  11.128726  9.092584e-29  ***
+diff1            0.008394 -0.119122  0.135910  0.065060  1.008430   0.887700    1.145579  0.502099     0.470255      0.533925   0.129022  8.973406e-01     
+conf_resp:diff1 -0.125258 -0.181548 -0.068968  0.028720  0.882269   0.833978    0.933356  0.468726     0.454737      0.482765  -4.361372  1.292492e-05  ***--------------------------------------------------------------------------------
+
+
+===== Model for tilt =====
+Model failed to converge with max|grad| = 0.00607887 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*diff+(1+conf_resp*diff|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 46400	 Groups: {'subject_ID': np.float64(29.0)}
+
+Log-likelihood: -23772.652 	 AIC: 47573.304
+
+Random effects:
+
+                       Name    Var    Std
+subject_ID      (Intercept)  0.163  0.403
+subject_ID        conf_resp  0.124  0.352
+subject_ID            diff1  0.046  0.214
+subject_ID  conf_resp:diff1  0.011  0.104
+
+                    IV1              IV2   Corr
+subject_ID  (Intercept)        conf_resp -0.471
+subject_ID  (Intercept)            diff1 -0.912
+subject_ID  (Intercept)  conf_resp:diff1  0.630
+subject_ID    conf_resp            diff1  0.071
+subject_ID    conf_resp  conf_resp:diff1 -0.973
+subject_ID        diff1  conf_resp:diff1 -0.270
+
+Fixed effects:
+
+                 Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)        -0.446  -0.620   -0.272  0.089  0.640      0.538       0.762  0.390        0.350         0.432  -5.022  0.000  ***
+conf_resp           0.808   0.673    0.942  0.069  2.243      1.960       2.566  0.692        0.662         0.720  11.764  0.000  ***
+diff1               0.129  -0.010    0.268  0.071  1.137      0.990       1.307  0.532        0.497         0.566   1.817  0.069    .
+conf_resp:diff1    -0.298  -0.361   -0.236  0.032  0.742      0.697       0.790  0.426        0.411         0.441  -9.378  0.000  ***
+
+                 Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci     Z-stat         P-val  Sig
+(Intercept)     -0.446104 -0.620223 -0.271985  0.088838  0.640117   0.537825    0.761866  0.390288     0.349731      0.432420  -5.021550  5.125613e-07  ***
+conf_resp        0.807688  0.673121  0.942255  0.068658  2.242717   1.960346    2.565761  0.691617     0.662202      0.719555  11.763941  5.987307e-32  ***
+diff1            0.128686 -0.010156  0.267528  0.070839  1.137333   0.989895    1.306731  0.532127     0.497461      0.566486   1.816595  6.927915e-02    .
+conf_resp:diff1 -0.298448 -0.360821 -0.236075  0.031823  0.741969   0.697104    0.789721  0.425937     0.410761      0.441254  -9.378253  6.707485e-21  ***--------------------------------------------------------------------------------
+
+
