@@ -1,0 +1,232 @@
+===== Model for size =====
+Model failed to converge with max|grad| = 0.0141274 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*stim_condition+(1+conf_resp*stim_condition|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 8064	 Groups: {'subject_ID': 28.0}
+
+Log-likelihood: -4376.486 	 AIC: 8806.971
+
+Random effects:
+
+                                 Name    Var    Std
+subject_ID                (Intercept)  0.429  0.655
+subject_ID                  conf_resp  0.057  0.238
+subject_ID            stim_condition1  0.352  0.593
+subject_ID            stim_condition2  0.101  0.318
+subject_ID  conf_resp:stim_condition1  0.072  0.267
+subject_ID  conf_resp:stim_condition2  0.015  0.124
+
+                                  IV1                        IV2   Corr
+subject_ID                (Intercept)                  conf_resp -0.663
+subject_ID                (Intercept)            stim_condition1 -0.921
+subject_ID                (Intercept)            stim_condition2 -0.769
+subject_ID                (Intercept)  conf_resp:stim_condition1  0.765
+subject_ID                (Intercept)  conf_resp:stim_condition2  0.798
+subject_ID                  conf_resp            stim_condition1  0.407
+subject_ID                  conf_resp            stim_condition2  0.065
+subject_ID                  conf_resp  conf_resp:stim_condition1 -0.059
+subject_ID                  conf_resp  conf_resp:stim_condition2 -0.191
+subject_ID            stim_condition1            stim_condition2  0.936
+subject_ID            stim_condition1  conf_resp:stim_condition1 -0.934
+subject_ID            stim_condition1  conf_resp:stim_condition2 -0.969
+subject_ID            stim_condition2  conf_resp:stim_condition1 -1.000
+subject_ID            stim_condition2  conf_resp:stim_condition2 -0.977
+subject_ID  conf_resp:stim_condition1  conf_resp:stim_condition2  0.976
+
+Fixed effects:
+
+                           Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)                  -0.170  -0.509    0.169  0.173  0.844      0.601       1.184  0.458        0.375         0.542  -0.983  0.326     
+conf_resp                     0.551   0.422    0.680  0.066  1.736      1.526       1.974  0.634        0.604         0.664   8.386  0.000  ***
+stim_condition1               0.080  -0.318    0.477  0.203  1.083      0.728       1.612  0.520        0.421         0.617   0.393  0.694     
+stim_condition2               0.185  -0.216    0.587  0.205  1.203      0.805       1.798  0.546        0.446         0.643   0.904  0.366     
+conf_resp:stim_condition1    -0.140  -0.318    0.037  0.091  0.869      0.728       1.038  0.465        0.421         0.509  -1.547  0.122     
+conf_resp:stim_condition2    -0.092  -0.248    0.065  0.080  0.913      0.780       1.067  0.477        0.438         0.516  -1.146  0.252     
+
+                           Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci    Z-stat         P-val  Sig
+(Intercept)               -0.170017 -0.508981  0.168948  0.172944  0.843651   0.601108    1.184058  0.457598     0.375432      0.542137 -0.983073  3.255717e-01     
+conf_resp                  0.551310  0.422463  0.680156  0.065739  1.735524   1.525715    1.974185  0.634439     0.604073      0.663773  8.386332  5.015439e-17  ***
+stim_condition1            0.079729 -0.318028  0.477485  0.202941  1.082993   0.727582    1.612016  0.519922     0.421156      0.617154  0.392866  6.944184e-01     
+stim_condition2            0.185191 -0.216362  0.586745  0.204878  1.203449   0.805444    1.798126  0.546166     0.446120      0.642618  0.903911  3.660427e-01     
+conf_resp:stim_condition1 -0.140203 -0.317881  0.037475  0.090654  0.869182   0.727689    1.038186  0.465006     0.421192      0.509368 -1.546580  1.219647e-01     
+conf_resp:stim_condition2 -0.091557 -0.248113  0.065000  0.079877  0.912510   0.780272    1.067159  0.477127     0.438288      0.516244 -1.146216  2.517056e-01     --------------------------------------------------------------------------------
+
+
+===== Model for duration =====
+boundary (singular) fit: see help('isSingular') 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*stim_condition+(1+conf_resp*stim_condition|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 8064	 Groups: {'subject_ID': 28.0}
+
+Log-likelihood: -4236.968 	 AIC: 8527.936
+
+Random effects:
+
+                                 Name    Var    Std
+subject_ID                (Intercept)  0.435  0.660
+subject_ID                  conf_resp  0.057  0.238
+subject_ID            stim_condition3  0.148  0.385
+subject_ID            stim_condition4  0.041  0.204
+subject_ID  conf_resp:stim_condition3  0.021  0.145
+subject_ID  conf_resp:stim_condition4  0.013  0.116
+
+                                  IV1                        IV2   Corr
+subject_ID                (Intercept)                  conf_resp -0.671
+subject_ID                (Intercept)            stim_condition3 -0.811
+subject_ID                (Intercept)            stim_condition4 -0.980
+subject_ID                (Intercept)  conf_resp:stim_condition3  0.764
+subject_ID                (Intercept)  conf_resp:stim_condition4  0.990
+subject_ID                  conf_resp            stim_condition3  0.110
+subject_ID                  conf_resp            stim_condition4  0.511
+subject_ID                  conf_resp  conf_resp:stim_condition3 -0.034
+subject_ID                  conf_resp  conf_resp:stim_condition4 -0.559
+subject_ID            stim_condition3            stim_condition4  0.911
+subject_ID            stim_condition3  conf_resp:stim_condition3 -0.997
+subject_ID            stim_condition3  conf_resp:stim_condition4 -0.886
+subject_ID            stim_condition4  conf_resp:stim_condition3 -0.876
+subject_ID            stim_condition4  conf_resp:stim_condition4 -0.998
+subject_ID  conf_resp:stim_condition3  conf_resp:stim_condition4  0.847
+
+Fixed effects:
+
+                           Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)                  -0.196  -0.538    0.146  0.175  0.822      0.584       1.157  0.451        0.369         0.536  -1.123  0.261     
+conf_resp                     0.560   0.430    0.691  0.066  1.751      1.537       1.995  0.637        0.606         0.666   8.427  0.000  ***
+stim_condition3              -0.036  -0.437    0.366  0.205  0.965      0.646       1.442  0.491        0.392         0.591  -0.173  0.862     
+stim_condition4              -0.117  -0.514    0.280  0.203  0.889      0.598       1.323  0.471        0.374         0.569  -0.579  0.563     
+conf_resp:stim_condition3    -0.032  -0.192    0.129  0.082  0.969      0.825       1.137  0.492        0.452         0.532  -0.388  0.698     
+conf_resp:stim_condition4     0.010  -0.147    0.166  0.080  1.010      0.863       1.181  0.502        0.463         0.541   0.119  0.905     
+
+                           Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci    Z-stat         P-val  Sig
+(Intercept)               -0.196094 -0.538333  0.146144  0.174614  0.821935   0.583721    1.157362  0.451133     0.368576      0.536471 -1.123013  2.614318e-01     
+conf_resp                  0.560213  0.429918  0.690508  0.066478  1.751045   1.537132    1.994728  0.636502     0.605854      0.666080  8.427023  3.545711e-17  ***
+stim_condition3           -0.035505 -0.437142  0.366131  0.204920  0.965118   0.645880    1.442144  0.491125     0.392422      0.590524 -0.173264  8.624439e-01     
+stim_condition4           -0.117156 -0.514061  0.279748  0.202506  0.889446   0.598062    1.322796  0.470744     0.374242      0.569484 -0.578533  5.629045e-01     
+conf_resp:stim_condition3 -0.031757 -0.192159  0.128645  0.081839  0.968742   0.825176    1.137286  0.492061     0.452108      0.532117 -0.388043  6.979845e-01     
+conf_resp:stim_condition4  0.009502 -0.147197  0.166202  0.079950  1.009548   0.863124    1.180811  0.502376     0.463267      0.541455  0.118853  9.053918e-01     --------------------------------------------------------------------------------
+
+
+===== Model for noise =====
+Model failed to converge with max|grad| = 0.00450039 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*stim_condition+(1+conf_resp*stim_condition|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 8064	 Groups: {'subject_ID': 28.0}
+
+Log-likelihood: -4390.423 	 AIC: 8834.847
+
+Random effects:
+
+                                 Name    Var    Std
+subject_ID                (Intercept)  0.419  0.647
+subject_ID                  conf_resp  0.054  0.232
+subject_ID            stim_condition5  0.216  0.465
+subject_ID            stim_condition6  0.440  0.663
+subject_ID  conf_resp:stim_condition5  0.034  0.184
+subject_ID  conf_resp:stim_condition6  0.049  0.221
+
+                                  IV1                        IV2   Corr
+subject_ID                (Intercept)                  conf_resp -0.687
+subject_ID                (Intercept)            stim_condition5 -0.950
+subject_ID                (Intercept)            stim_condition6 -0.018
+subject_ID                (Intercept)  conf_resp:stim_condition5  0.974
+subject_ID                (Intercept)  conf_resp:stim_condition6  0.179
+subject_ID                  conf_resp            stim_condition5  0.535
+subject_ID                  conf_resp            stim_condition6 -0.297
+subject_ID                  conf_resp  conf_resp:stim_condition5 -0.595
+subject_ID                  conf_resp  conf_resp:stim_condition6  0.312
+subject_ID            stim_condition5            stim_condition6 -0.130
+subject_ID            stim_condition5  conf_resp:stim_condition5 -0.931
+subject_ID            stim_condition5  conf_resp:stim_condition6 -0.104
+subject_ID            stim_condition6  conf_resp:stim_condition5 -0.008
+subject_ID            stim_condition6  conf_resp:stim_condition6 -0.949
+subject_ID  conf_resp:stim_condition5  conf_resp:stim_condition6  0.158
+
+Fixed effects:
+
+                           Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)                  -0.172  -0.510    0.166  0.173  0.842      0.600       1.181  0.457        0.375         0.541  -0.997  0.319     
+conf_resp                     0.555   0.427    0.684  0.065  1.743      1.533       1.981  0.635        0.605         0.665   8.489  0.000  ***
+stim_condition5              -0.145  -0.507    0.217  0.185  0.865      0.602       1.243  0.464        0.376         0.554  -0.784  0.433     
+stim_condition6              -0.194  -0.670    0.282  0.243  0.824      0.512       1.326  0.452        0.338         0.570  -0.798  0.425     
+conf_resp:stim_condition5    -0.166  -0.333    0.001  0.085  0.847      0.717       1.001  0.459        0.417         0.500  -1.943  0.052    .
+conf_resp:stim_condition6     0.117  -0.064    0.299  0.093  1.124      0.938       1.348  0.529        0.484         0.574   1.264  0.206     
+
+                           Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci    Z-stat         P-val  Sig
+(Intercept)               -0.172073 -0.510331  0.166185  0.172584  0.841918   0.600297    1.180792  0.457088     0.375116      0.541451 -0.997038  3.187459e-01     
+conf_resp                  0.555374  0.427152  0.683595  0.065420  1.742592   1.532886    1.980987  0.635381     0.605193      0.664541  8.489298  2.078882e-17  ***
+stim_condition5           -0.144981 -0.507284  0.217321  0.184852  0.865038   0.602129    1.242743  0.463818     0.375830      0.554118 -0.784312  4.328573e-01     
+stim_condition6           -0.193969 -0.670324  0.282386  0.243043  0.823683   0.511543    1.326291  0.451659     0.338424      0.570131 -0.798086  4.248205e-01     
+conf_resp:stim_condition5 -0.165828 -0.333069  0.001413  0.085329  0.847192   0.716721    1.001414  0.458638     0.417494      0.500353 -1.943404  5.196740e-02    .
+conf_resp:stim_condition6  0.117142 -0.064469  0.298754  0.092661  1.124280   0.937565    1.348178  0.529252     0.483888      0.574138  1.264209  2.061550e-01     --------------------------------------------------------------------------------
+
+
+===== Model for tilt =====
+Model failed to converge with max|grad| = 0.0419468 (tol = 0.002, component 1) 
+
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: correct~conf_resp*stim_condition+(1+conf_resp*stim_condition|subject_ID)
+
+Family: binomial	 Inference: parametric
+
+Number of observations: 8064	 Groups: {'subject_ID': 28.0}
+
+Log-likelihood: -3943.192 	 AIC: 7940.385
+
+Random effects:
+
+                                 Name    Var    Std
+subject_ID                (Intercept)  0.452  0.672
+subject_ID                  conf_resp  0.065  0.254
+subject_ID            stim_condition7  0.363  0.603
+subject_ID            stim_condition8  1.142  1.069
+subject_ID  conf_resp:stim_condition7  0.045  0.212
+subject_ID  conf_resp:stim_condition8  0.200  0.447
+
+                                  IV1                        IV2   Corr
+subject_ID                (Intercept)                  conf_resp -0.690
+subject_ID                (Intercept)            stim_condition7 -0.894
+subject_ID                (Intercept)            stim_condition8  0.151
+subject_ID                (Intercept)  conf_resp:stim_condition7  0.791
+subject_ID                (Intercept)  conf_resp:stim_condition8  0.119
+subject_ID                  conf_resp            stim_condition7  0.489
+subject_ID                  conf_resp            stim_condition8 -0.638
+subject_ID                  conf_resp  conf_resp:stim_condition7 -0.530
+subject_ID                  conf_resp  conf_resp:stim_condition8  0.549
+subject_ID            stim_condition7            stim_condition8 -0.277
+subject_ID            stim_condition7  conf_resp:stim_condition7 -0.963
+subject_ID            stim_condition7  conf_resp:stim_condition8 -0.063
+subject_ID            stim_condition8  conf_resp:stim_condition7  0.506
+subject_ID            stim_condition8  conf_resp:stim_condition8 -0.938
+subject_ID  conf_resp:stim_condition7  conf_resp:stim_condition8 -0.178
+
+Fixed effects:
+
+                           Estimate  2.5_ci  97.5_ci     SE     OR  OR_2.5_ci  OR_97.5_ci   Prob  Prob_2.5_ci  Prob_97.5_ci  Z-stat  P-val  Sig
+(Intercept)                  -0.140  -0.486    0.207  0.177  0.870      0.615       1.230  0.465        0.381         0.552  -0.789  0.430     
+conf_resp                     0.536   0.402    0.671  0.069  1.710      1.494       1.956  0.631        0.599         0.662   7.811  0.000  ***
+stim_condition7               0.009  -0.417    0.436  0.218  1.009      0.659       1.546  0.502        0.397         0.607   0.042  0.966     
+stim_condition8              -0.114  -0.825    0.598  0.363  0.893      0.438       1.818  0.472        0.305         0.645  -0.313  0.754     
+conf_resp:stim_condition7    -0.245  -0.408   -0.082  0.083  0.783      0.665       0.921  0.439        0.399         0.480  -2.942  0.003   **
+conf_resp:stim_condition8     0.464   0.170    0.757  0.150  1.590      1.185       2.133  0.614        0.542         0.681   3.090  0.002   **
+
+                           Estimate    2.5_ci   97.5_ci        SE        OR  OR_2.5_ci  OR_97.5_ci      Prob  Prob_2.5_ci  Prob_97.5_ci    Z-stat         P-val  Sig
+(Intercept)               -0.139533 -0.486184  0.207119  0.176866  0.869765   0.614968    1.230129  0.465173     0.380793      0.551595 -0.788916  4.301612e-01     
+conf_resp                  0.536364  0.401774  0.670954  0.068670  1.709779   1.494473    1.956103  0.630966     0.599114      0.661717  7.810767  5.684115e-15  ***
+stim_condition7            0.009212 -0.417462  0.435885  0.217695  1.009254   0.658717    1.546331  0.502303     0.397124      0.607278  0.042314  9.662482e-01     
+stim_condition8           -0.113559 -0.825019  0.597902  0.362997  0.892652   0.438227    1.818299  0.471641     0.304699      0.645176 -0.312837  7.544046e-01     
+conf_resp:stim_condition7 -0.245132 -0.408414 -0.081849  0.083309  0.782601   0.664703    0.921411  0.439022     0.399292      0.479549 -2.942442  3.256347e-03   **
+conf_resp:stim_condition8  0.463504  0.169540  0.757467  0.149984  1.589634   1.184760    2.132868  0.613845     0.542284      0.680804  3.090353  1.999188e-03   **--------------------------------------------------------------------------------
+
+

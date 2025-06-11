@@ -97,90 +97,90 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 __________________________________________________________________
 Two-way Posthoc — d-prime
 __________________________________________________________________
-               Contrast Size    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0                  Size    -  0.0  1.0   True        True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
-1         Spatial freq.    -  0.0  1.0   True        True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
-2  Size * Spatial freq.    0    0    1   True        True  11.004477  28.0   two-sided  1.116729e-11  7.971e+08  1.031480
-3  Size * Spatial freq.    1    0    1   True        True   9.777869  28.0   two-sided  1.576656e-10  6.482e+07  1.227922
+               Contrast Size  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0                  Size    -  0  1   True       True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
+1         Spatial freq.    -  0  1   True       True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
+2  Size * Spatial freq.    0  0  1   True       True  11.004477  28.0   two-sided  1.116729e-11  7.971e+08  1.031480
+3  Size * Spatial freq.    1  0  1   True       True   9.777869  28.0   two-sided  1.576656e-10  6.482e+07  1.227922
 
 
-             Contrast Size    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0                Size    -  0.0  1.0   True        True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
-1         Tilt offset    -  0.0  1.0   True        True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
-2  Size * Tilt offset    0    0    1   True        True  16.089661  28.0   two-sided  1.116093e-15  5.208e+12  1.574800
-3  Size * Tilt offset    1    0    1   True        True  10.838492  28.0   two-sided  1.580449e-11  5.733e+08  1.388966
+             Contrast Size  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0                Size    -  0  1   True       True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
+1         Tilt offset    -  0  1   True       True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
+2  Size * Tilt offset    0  0  1   True       True  16.089661  28.0   two-sided  1.116093e-15  5.208e+12  1.574800
+3  Size * Tilt offset    1  0  1   True       True  10.838492  28.0   two-sided  1.580449e-11  5.733e+08  1.388966
 
 
-       Contrast Size    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0          Size    -  0.0  1.0   True        True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
-1         Noise    -  0.0  1.0   True        True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
-2  Size * Noise    0    0    1   True        True   6.780867  28.0   two-sided  2.301028e-07  6.918e+04  0.650123
-3  Size * Noise    1    0    1   True        True  11.541690  28.0   two-sided  3.712088e-12   2.27e+09  1.454678
+       Contrast Size  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0          Size    -  0  1   True       True   8.921771  28.0   two-sided  1.121833e-09  1.016e+07  0.879212
+1         Noise    -  0  1   True       True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
+2  Size * Noise    0  0  1   True       True   6.780867  28.0   two-sided  2.301028e-07  6.918e+04  0.650123
+3  Size * Noise    1  0  1   True       True  11.541690  28.0   two-sided  3.712088e-12   2.27e+09  1.454678
 
 
-                      Contrast Spatial freq.    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0                Spatial freq.             -  0.0  1.0   True        True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
-1                  Tilt offset             -  0.0  1.0   True        True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
-2  Spatial freq. * Tilt offset             0    0    1   True        True  13.521506  28.0   two-sided  8.479335e-14  8.305e+10  1.554397
-3  Spatial freq. * Tilt offset             1    0    1   True        True  13.325367  28.0   two-sided  1.210421e-13  5.914e+10  1.418806
+                      Contrast Spatial freq.  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0                Spatial freq.             -  0  1   True       True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
+1                  Tilt offset             -  0  1   True       True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
+2  Spatial freq. * Tilt offset             0  0  1   True       True  13.521506  28.0   two-sided  8.479335e-14  8.305e+10  1.554397
+3  Spatial freq. * Tilt offset             1  0  1   True       True  13.325367  28.0   two-sided  1.210421e-13  5.914e+10  1.418806
 
 
-                Contrast Spatial freq.    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0          Spatial freq.             -  0.0  1.0   True        True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
-1                  Noise             -  0.0  1.0   True        True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
-2  Spatial freq. * Noise             0    0    1   True        True   8.646390  28.0   two-sided  2.152581e-09  5.497e+06  0.775666
-3  Spatial freq. * Noise             1    0    1   True        True  11.609116  28.0   two-sided  3.240606e-12  2.583e+09  1.343087
+                Contrast Spatial freq.  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0          Spatial freq.             -  0  1   True       True  11.629353  28.0   two-sided  3.111463e-12  2.685e+09  1.162947
+1                  Noise             -  0  1   True       True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
+2  Spatial freq. * Noise             0  0  1   True       True   8.646390  28.0   two-sided  2.152581e-09  5.497e+06  0.775666
+3  Spatial freq. * Noise             1  0  1   True       True  11.609116  28.0   two-sided  3.240606e-12  2.583e+09  1.343087
 
 
-              Contrast Noise    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0                Noise     -  0.0  1.0   True        True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
-1          Tilt offset     -  0.0  1.0   True        True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
-2  Noise * Tilt offset     0    0    1   True        True  16.794059  28.0   two-sided  3.749448e-16   1.48e+13  1.569973
-3  Noise * Tilt offset     1    0    1   True        True  10.818610  28.0   two-sided  1.647952e-11  5.509e+08  1.425705
+              Contrast Noise  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0                Noise     -  0  1   True       True  11.945368  28.0   two-sided  1.658925e-12  4.883e+09  1.060620
+1          Tilt offset     -  0  1   True       True  15.168513  28.0   two-sided  4.934446e-15  1.256e+12  1.550361
+2  Noise * Tilt offset     0  0  1   True       True  16.794059  28.0   two-sided  3.749448e-16   1.48e+13  1.569973
+3  Noise * Tilt offset     1  0  1   True       True  10.818610  28.0   two-sided  1.647952e-11  5.509e+08  1.425705
 
 
 __________________________________________________________________
 Two-way Posthoc — conf
 __________________________________________________________________
-               Contrast Size    A    B Paired  Parametric         T   dof alternative         p-unc       BF10     cohen
-0                  Size    -  0.0  1.0   True        True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
-1         Spatial freq.    -  0.0  1.0   True        True  6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
-2  Size * Spatial freq.    0    0    1   True        True  5.890588  28.0   two-sided  2.457477e-06   7708.979  0.711294
-3  Size * Spatial freq.    1    0    1   True        True  7.423868  28.0   two-sided  4.379170e-08  3.252e+05  0.658352
+               Contrast Size  A  B Paired Parametric         T   dof alternative         p-unc       BF10     cohen
+0                  Size    -  0  1   True       True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
+1         Spatial freq.    -  0  1   True       True  6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
+2  Size * Spatial freq.    0  0  1   True       True  5.890588  28.0   two-sided  2.457477e-06   7708.979  0.711294
+3  Size * Spatial freq.    1  0  1   True       True  7.423868  28.0   two-sided  4.379170e-08  3.252e+05  0.658352
 
 
-             Contrast Size    A    B Paired  Parametric         T   dof alternative         p-unc       BF10     cohen
-0                Size    -  0.0  1.0   True        True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
-1         Tilt offset    -  0.0  1.0   True        True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
-2  Size * Tilt offset    0    0    1   True        True  6.976658  28.0   two-sided  1.381440e-07  1.113e+05  0.492982
-3  Size * Tilt offset    1    0    1   True        True  5.861082  28.0   two-sided  2.661211e-06   7163.167  0.352764
+             Contrast Size  A  B Paired Parametric         T   dof alternative         p-unc       BF10     cohen
+0                Size    -  0  1   True       True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
+1         Tilt offset    -  0  1   True       True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
+2  Size * Tilt offset    0  0  1   True       True  6.976658  28.0   two-sided  1.381440e-07  1.113e+05  0.492982
+3  Size * Tilt offset    1  0  1   True       True  5.861082  28.0   two-sided  2.661211e-06   7163.167  0.352764
 
 
-       Contrast Size    A    B Paired  Parametric         T   dof alternative         p-unc       BF10     cohen
-0          Size    -  0.0  1.0   True        True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
-1         Noise    -  0.0  1.0   True        True  8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
-2  Size * Noise    0    0    1   True        True  6.565060  28.0   two-sided  4.057368e-07  4.083e+04  0.344859
-3  Size * Noise    1    0    1   True        True  9.479374  28.0   two-sided  3.091267e-10   3.43e+07  0.855780
+       Contrast Size  A  B Paired Parametric         T   dof alternative         p-unc       BF10     cohen
+0          Size    -  0  1   True       True  7.401019  28.0   two-sided  4.641217e-08   3.08e+05  0.554174
+1         Noise    -  0  1   True       True  8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
+2  Size * Noise    0  0  1   True       True  6.565060  28.0   two-sided  4.057368e-07  4.083e+04  0.344859
+3  Size * Noise    1  0  1   True       True  9.479374  28.0   two-sided  3.091267e-10   3.43e+07  0.855780
 
 
-                      Contrast Spatial freq.    A    B Paired  Parametric         T   dof alternative         p-unc       BF10     cohen
-0                Spatial freq.             -  0.0  1.0   True        True  6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
-1                  Tilt offset             -  0.0  1.0   True        True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
-2  Spatial freq. * Tilt offset             0    0    1   True        True  6.960509  28.0   two-sided  1.440586e-07   1.07e+05  0.546414
-3  Spatial freq. * Tilt offset             1    0    1   True        True  5.892467  28.0   two-sided  2.445052e-06   7745.098  0.290444
+                      Contrast Spatial freq.  A  B Paired Parametric         T   dof alternative         p-unc       BF10     cohen
+0                Spatial freq.             -  0  1   True       True  6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
+1                  Tilt offset             -  0  1   True       True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
+2  Spatial freq. * Tilt offset             0  0  1   True       True  6.960509  28.0   two-sided  1.440586e-07   1.07e+05  0.546414
+3  Spatial freq. * Tilt offset             1  0  1   True       True  5.892467  28.0   two-sided  2.445052e-06   7745.098  0.290444
 
 
-                Contrast Spatial freq.    A    B Paired  Parametric          T   dof alternative         p-unc       BF10     cohen
-0          Spatial freq.             -  0.0  1.0   True        True   6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
-1                  Noise             -  0.0  1.0   True        True   8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
-2  Spatial freq. * Noise             0    0    1   True        True   6.111127  28.0   two-sided  1.357827e-06  1.333e+04  0.580448
-3  Spatial freq. * Noise             1    0    1   True        True  12.586157  28.0   two-sided  4.796253e-13  1.592e+10  0.611295
+                Contrast Spatial freq.  A  B Paired Parametric          T   dof alternative         p-unc       BF10     cohen
+0          Spatial freq.             -  0  1   True       True   6.692564  28.0   two-sided  2.900372e-07  5.578e+04  0.699605
+1                  Noise             -  0  1   True       True   8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
+2  Spatial freq. * Noise             0  0  1   True       True   6.111127  28.0   two-sided  1.357827e-06  1.333e+04  0.580448
+3  Spatial freq. * Noise             1  0  1   True       True  12.586157  28.0   two-sided  4.796253e-13  1.592e+10  0.611295
 
 
-              Contrast Noise    A    B Paired  Parametric         T   dof alternative         p-unc       BF10     cohen
-0                Noise     -  0.0  1.0   True        True  8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
-1          Tilt offset     -  0.0  1.0   True        True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
-2  Noise * Tilt offset     0    0    1   True        True  6.739512  28.0   two-sided  2.564239e-07  6.255e+04  0.512603
-3  Noise * Tilt offset     1    0    1   True        True  6.022707  28.0   two-sided  1.721652e-06  1.071e+04  0.335274
+              Contrast Noise  A  B Paired Parametric         T   dof alternative         p-unc       BF10     cohen
+0                Noise     -  0  1   True       True  8.961801  28.0   two-sided  1.021288e-09   1.11e+07  0.622669
+1          Tilt offset     -  0  1   True       True  6.739720  28.0   two-sided  2.562842e-07  6.258e+04  0.430644
+2  Noise * Tilt offset     0  0  1   True       True  6.739512  28.0   two-sided  2.564239e-07  6.255e+04  0.512603
+3  Noise * Tilt offset     1  0  1   True       True  6.022707  28.0   two-sided  1.721652e-06  1.071e+04  0.335274
 
 

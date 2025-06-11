@@ -17,7 +17,7 @@ import pingouin as pg
 import sys
 import warnings
 
-# use R library
+# R-related imports for ANOVA
 import rpy2
 import rpy2.robjects as robjects
 from rpy2.robjects.packages import importr
@@ -105,7 +105,7 @@ def merge8(data):
     n_subjs = len(pd.unique(data.subject_ID))
     n_conds = 4
     n_level = 2
-    n_columns = 12
+    n_columns = 14
     pro_data = np.empty(shape = (n_subjs, n_conds, n_level, n_columns))
 
     for subj in range(n_subjs):
@@ -124,13 +124,17 @@ def merge8(data):
                 c_conf_mean = subj_cond_data[subj_cond_data.correct == 1].conf_resp.mean()
                 ic_conf_mean = subj_cond_data[subj_cond_data.correct == 0].conf_resp.mean()
                 percept_rt = subj_cond_data.percept_rt.mean()
+                c_rt = subj_cond_data[subj_cond_data.correct == 1].percept_rt.mean()
+                ic_rt = subj_cond_data[subj_cond_data.correct == 0].percept_rt.mean()
                 conf_rt = subj_cond_data.conf_rt.mean()
 
                 # package output
                 pro_data[subj, cond, level, :] = (subj_no, stim_cond, level, percept_acc,
                                                    d_prime, c, beta, conf_mean,
                                                    c_conf_mean, ic_conf_mean,
-                                                  percept_rt, conf_rt
+                                                  percept_rt, 
+                                                  c_rt, ic_rt,
+                                                  conf_rt
 
                                            )
 
@@ -139,7 +143,8 @@ def merge8(data):
     column_name = ['subj_no', 'stim_cond', 'stim_level', 'percept_acc',
                    'd-prime', 'c', 'beta', 'conf',
                    'c_conf', 'ic_conf',
-                   'percept_rt', 'conf_rt'
+                   'percept_rt', 'c_rt', 'ic_rt',
+                   'conf_rt'
                    ]
     pro_data = pd.DataFrame(pro_data, columns=column_name)
 
@@ -253,6 +258,75 @@ def plot_MC_diff(data, path):
     plt.suptitle('Difference analysis\n', fontsize=16, fontweight='bold')
     plot_name = path / f'merged_conditions_difference_plot.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
+    print(plot_name)
+    plt.close()
+
+
+def plot_MC_diff_rt(data, path):
+    subjs = data.subj_no.unique()
+    plot_data = np.empty(shape=(len(subjs), 4))
+
+    measure = 'percept_rt'
+    for s, subj in enumerate(subjs):
+        subj_data = data[data.subj_no == subj]
+        for factor in range(4):
+            plot_data[s][factor] = \
+            np.average(subj_data[(subj_data.stim_cond == factor) & (subj_data.stim_level == 1)][measure]) - \
+            np.average(subj_data[(subj_data.stim_cond == factor) & (subj_data.stim_level == 0)][measure])
+
+    label = ['Size', 'Spatial\nfrequency', 'Noise', 'Tilt\noffset']
+    paired_t_tests = []
+    for i in range(4):
+        for j in range(i+1, 4):
+            t_stat, p_val = ttest_rel(plot_data[:, i], plot_data[:, j])
+            bayes10 = float(pg.ttest(plot_data[:, i], plot_data[:, j], paired=True)['BF10'].values[0])
+            bayes01 = 1 / bayes10
+            paired_t_tests.append((label[i], label[j], t_stat, p_val, bayes10, bayes01))
+
+    # plot graph
+    plt.clf()
+    fig, ax = plt.subplots(1,1, layout="constrained", figsize=(3.5, 4))
+    plate = plt.cm.get_cmap('Dark2', 8)
+    plate = [plate(0), plate(1), plate(2), plate(3)]
+    titles = 'Experiment 2'
+    ylabels = r'$RT_{Hard} - RT_{Easy}$ (in seconds)' 
+
+    plot_data = plot_data / 1000
+
+    avg = np.average(plot_data, axis = 0)
+    se = sem(plot_data, axis = 0)
+    ax.bar([0,1,2,3], avg, yerr=se, color=plate, alpha = 0.5)
+    ax.set_ylabel(ylabels, fontsize=14)
+    ax.set_title(titles, fontsize=12, fontweight='bold')
+    ax.set_xticks([0,1,2,3], label, fontsize=14)
+    ax.set_ylim(-0.75, 0.75)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    for sub in range(plot_data.shape[0]):
+        x_position = np.array([0,1,2,3]) - 0.25
+        ax.scatter(x_position, plot_data[sub], color=plate, alpha=1,
+                        s=5
+                        )
+
+
+    for i, test in enumerate(paired_t_tests):
+        x_pos = 0.5 * (label.index(test[0]) + label.index(test[1]))
+        y_pos = 0.6
+        if test[3] < 0.05:
+            annotate = r"$p = {:.3f}$".format(test[3])
+            ax.annotate(annotate, xy=(x_pos, y_pos),
+                        xytext=(0, 0), textcoords='offset points',
+                        ha='center', va='bottom', fontsize=10, color='black',
+                        )
+            ax.plot([label.index(test[0]), label.index(test[1])], [y_pos, y_pos],
+                        color='k', alpha = 0.5
+                        )
+
+
+
+    plot_name = path / 'difference_rt.png'
+    fig.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
     plt.close()
 
@@ -461,6 +535,52 @@ def plot_MC_folded_X(data, path):
     ax[0].set_ylim(1.8, 3.2)
     ax[0].legend(fontsize=10, loc = 'upper left')
     plot_name = path / f'merged_conditions_folded_X.png'
+    plt.savefig(plot_name, format='png', dpi=384, transparent=True)
+    print(plot_name)
+    plt.close()
+
+
+def plot_MC_folded_X_rt(data, path):
+    plt.clf()
+    fig, ax = plt.subplots(2,2, figsize=(5,5), layout='constrained')
+    ax = ax.flatten()
+
+    subjs = data.subj_no.unique()
+    expt_conds = data.stim_cond.unique()
+    levels = data.stim_level.unique()
+    rearg_data = np.empty(shape=(2, 2, expt_conds.shape[0], subjs.shape[0]))
+
+    for level in levels:
+        for cond in expt_conds:
+            cond_data = data[(data.stim_cond == cond) & (data.stim_level == level)]
+            rearg_data[int(level)][0][int(cond)][:] = cond_data.c_rt.to_numpy()
+            rearg_data[int(level)][1][int(cond)][:] = cond_data.ic_rt.to_numpy()
+    rearg_data = rearg_data / 1000  # convert to seconds
+    avg_array = np.mean(rearg_data, axis = 3)
+    sem_array = sem(rearg_data, axis = 3)
+
+    title = ['Size', 'Spatial frequency', 'Noise', 'Tilt offset']
+    plate = ['green', 'red']
+    # marker= ['o', 'x']
+    marker= ['None', 'None']
+    label = ['Correct', 'Error']
+    for c_ic in range(2):
+        for factor in range(4):
+            ax[factor].errorbar(np.array([0,1]), [avg_array[1][c_ic][factor], avg_array[0][c_ic][factor]],
+                                yerr=[sem_array[1][c_ic][factor], sem_array[0][c_ic][factor]], color=plate[c_ic],
+                                marker=marker[c_ic], ecolor='k', lw=2, label=label[c_ic]
+                                )
+            ax[factor].set_title(title[factor], fontsize=14, fontweight='bold')
+            ax[factor].set_xlim(-0.5, 1.5)
+            ax[factor].set_xticks([0,1], ['Hard', 'Easy'], fontsize=12)
+            ax[factor].spines['top'].set_visible(False)
+            ax[factor].spines['right'].set_visible(False)
+            ax[factor].set_ylim(0.6, 1.4)
+            ax[factor].set_ylabel('RT', fontsize=14)
+
+    plt.suptitle(f'Experiment 2', fontsize=18, fontweight='bold')
+    ax[0].legend(fontsize=10, loc = 'upper left')
+    plot_name = path / f'rt_folded_x_plot.png'
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
     plt.close()
@@ -756,17 +876,21 @@ def graph(data, path):
 
 
 def graphMC(data, path):
-    # Figure 3a, 3b
-    plot_MC_acc_conf_scatter(data, path)
-    plot_MC_acc_conf_slope(data, path)
+    # # Figure 3a, 3b
+    # plot_MC_acc_conf_scatter(data, path)
+    # plot_MC_acc_conf_slope(data, path)
 
-    # Figure 3c
-    plot_MC_diff(data, path)
+    # # Figure 3c
+    # plot_MC_diff(data, path)
 
-    plot_MC_z_transformed_diff(data, path)
+    # plot_MC_z_transformed_diff(data, path)
 
-    # Figure 5
-    plot_MC_folded_X(data, path)
+    # # Figure 5
+    # plot_MC_folded_X(data, path)
+
+    # Supplementary RT
+    plot_MC_diff_rt(data, path)
+    plot_MC_folded_X_rt(data, path)
 
 
 
@@ -862,7 +986,7 @@ def main():
         print("Processed data read from path")
 
     stat(pro_data, stat_path)
-    graph(pro_data, graph_path)
+    # graph(pro_data, graph_path)
     graphMC(pro_8_data, graph_path)
 
     print("--------------------------------------------------------------------------------")
