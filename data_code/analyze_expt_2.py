@@ -292,9 +292,7 @@ def plot_MC_diff_rt(data, path):
     plate = plt.cm.get_cmap('Dark2', 8)
     plate = [plate(0), plate(1), plate(2), plate(3)]
     titles = 'Experiment 2'
-    ylabels = r'$RT_{Hard} - RT_{Easy}$ (in seconds)' 
-
-    plot_data = plot_data / 1000
+    ylabels = r'$RT_{Hard} - RT_{Easy}$ (in ms)' 
 
     avg = np.average(plot_data, axis = 0)
     se = sem(plot_data, axis = 0)
@@ -302,7 +300,7 @@ def plot_MC_diff_rt(data, path):
     ax.set_ylabel(ylabels, fontsize=14)
     ax.set_title(titles, fontsize=12, fontweight='bold')
     ax.set_xticks([0,1,2,3], label, fontsize=14)
-    ax.set_ylim(-0.75, 0.75)
+    ax.set_ylim(-750, 2000)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
@@ -313,20 +311,25 @@ def plot_MC_diff_rt(data, path):
                         )
 
 
+    y_pos_array = np.array([3, 4, 5, 3.25, 4.5, 3.5]) * 350
     for i, test in enumerate(paired_t_tests):
         x_pos = 0.5 * (label.index(test[0]) + label.index(test[1]))
-        y_pos = 0.6
-        if test[3] < 0.05:
-            annotate = r"$p = {:.3f}$".format(test[3])
-            ax.annotate(annotate, xy=(x_pos, y_pos),
+        y_pos = y_pos_array[i]
+        # Determine if p is over power 3
+        if test[3] < 1e-3:
+            power = int(np.floor(np.log10(test[3])))
+            coefficient = test[3] / (10 ** power)
+            annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+        else:
+            annotation = r"$p = {:.2f}$".format(test[3])
+        ax.annotate(annotation, xy=(x_pos, y_pos),
                         xytext=(0, 0), textcoords='offset points',
                         ha='center', va='bottom', fontsize=10, color='black',
                         )
-            ax.plot([label.index(test[0]), label.index(test[1])], [y_pos, y_pos],
-                        color='k', alpha = 0.5
-                        )
-
-
+        y_pos = y_pos
+        ax.plot([label.index(test[0]), label.index(test[1])], [y_pos, y_pos],
+                    color='k', alpha = 0.5
+                    )
 
     plot_name = path / 'difference_rt.png'
     fig.savefig(plot_name, format='png', dpi=384, transparent=True)
@@ -428,9 +431,13 @@ def plot_MC_z_transformed_diff(data, path):
             power = int(np.floor(np.log10(test[3])))
             coefficient = test[3] / (10 ** power)
             annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+        else:
+            annotation = r"$p = {:.3f}$".format(test[3])
+            alpha = 0.5
+        
+        if test[3] < 0.05:
             alpha = 1
         else:
-            annotation = r"$p = {:.2f}$".format(test[3])
             alpha = 0.5
 
         ax.annotate(annotation, xy=(x_pos, y_pos_array[i]),
@@ -488,7 +495,7 @@ def plot_MC_folded_X(data, path):
         for factor in range(4):
             ax[factor].errorbar(np.array([0,1]), [avg_array[1][c_ic][factor], avg_array[0][c_ic][factor]],
                                 yerr=[sem_array[1][c_ic][factor], sem_array[0][c_ic][factor]], color=plate[c_ic],
-                                marker=marker[c_ic], ecolor='k', lw=2, label=label[c_ic]
+                                marker=marker[c_ic], ecolor=plate[c_ic], lw=2, label=label[c_ic]
                                 )
             ax[factor].set_title(title[factor], fontsize=14, fontweight='bold')
             ax[factor].set_xlim(-0.5, 1.5)
@@ -558,7 +565,6 @@ def plot_MC_folded_X_rt(data, path):
             cond_data = data[(data.stim_cond == cond) & (data.stim_level == level)]
             rearg_data[int(level)][0][int(cond)][:] = cond_data.c_rt.to_numpy()
             rearg_data[int(level)][1][int(cond)][:] = cond_data.ic_rt.to_numpy()
-    rearg_data = rearg_data / 1000  # convert to seconds
     avg_array = np.mean(rearg_data, axis = 3)
     sem_array = sem(rearg_data, axis = 3)
 
@@ -571,14 +577,14 @@ def plot_MC_folded_X_rt(data, path):
         for factor in range(4):
             ax[factor].errorbar(np.array([0,1]), [avg_array[1][c_ic][factor], avg_array[0][c_ic][factor]],
                                 yerr=[sem_array[1][c_ic][factor], sem_array[0][c_ic][factor]], color=plate[c_ic],
-                                marker=marker[c_ic], ecolor='k', lw=2, label=label[c_ic]
+                                marker=marker[c_ic], ecolor=plate[c_ic], lw=2, label=label[c_ic]
                                 )
             ax[factor].set_title(title[factor], fontsize=14, fontweight='bold')
             ax[factor].set_xlim(-0.5, 1.5)
             ax[factor].set_xticks([0,1], ['Hard', 'Easy'], fontsize=12)
             ax[factor].spines['top'].set_visible(False)
             ax[factor].spines['right'].set_visible(False)
-            ax[factor].set_ylim(0.6, 1.4)
+            ax[factor].set_ylim(600, 1400)
             ax[factor].set_ylabel('RT', fontsize=14)
 
     plt.suptitle(f'Experiment 2', fontsize=18, fontweight='bold')
@@ -660,9 +666,10 @@ def plot_MC_acc_conf_slope(data, path):
 
             m, c = fit_to_line(x_axis, y_axis)
             slope[s][int(cond)] = m
-            # exclude participants with d' difference less than 0.15
-            # if np.abs(x_axis[1] - x_axis[0]) < 0.12:
+            # exclude participants with d' difference less than 0.01
             if x_axis[1] - x_axis[0] > 0:
+                exclude_list.append(s)
+            if np.abs(x_axis[1] - x_axis[0]) < 0.01:
                 exclude_list.append(s)
 
     exclude_list = list(set(exclude_list))
@@ -880,20 +887,20 @@ def graph(data, path):
 
 def graphMC(data, path):
     # # Figure 3a, 3b
-    # plot_MC_acc_conf_scatter(data, path)
-    # plot_MC_acc_conf_slope(data, path)
+    plot_MC_acc_conf_scatter(data, path)
+    plot_MC_acc_conf_slope(data, path)
 
-    # # Figure 3c
-    # plot_MC_diff(data, path)
+    # Figure 3c
+    plot_MC_diff(data, path)
 
-    # plot_MC_z_transformed_diff(data, path)
+    plot_MC_z_transformed_diff(data, path)
 
-    # # Figure 5
-    # plot_MC_folded_X(data, path)
+    # Figure 5
+    plot_MC_folded_X(data, path)
 
     # Supplementary RT
-    plot_MC_diff_rt(data, path)
-    plot_MC_folded_X_rt(data, path)
+    # plot_MC_diff_rt(data, path)
+    # plot_MC_folded_X_rt(data, path)
 
 
 
@@ -953,6 +960,17 @@ def stat(data, path):
     sys.stdout.close()
     sys.stdout = orig_stdout
     print(f"Stat results save in {path}")
+
+
+def split_half_test(data, path):
+    half_pt = data.trial_no.max() // 2
+    first_half, second_half = data[data.trial_no <= half_pt], data[data.trial_no > half_pt]
+
+    for i, half_data in enumerate([first_half, second_half]):
+        pro_data = merge8(half_data)
+        split_path = path / f'split_{i}'
+        split_path.mkdir(parents=True, exist_ok=True)
+        graphMC(pro_data, split_path)
 
 
 def trial_level_modelling(data, path):
@@ -1029,10 +1047,11 @@ def main():
         pro_8_data = pd.read_csv(f'{out_pro_path}/merge8_processed_data.csv')
         print("Processed data read from path")
 
-    stat(pro_data, stat_path)
-    trial_level_modelling(data, stat_path)
-    graph(pro_data, graph_path)
-    graphMC(pro_8_data, graph_path)
+    split_half_test(data, graph_path)
+    # stat(pro_data, stat_path)
+    # # trial_level_modelling(data, stat_path)
+    # graph(pro_data, graph_path)
+    # graphMC(pro_8_data, graph_path)
 
     print("--------------------------------------------------------------------------------")
     print('ALL DONE')

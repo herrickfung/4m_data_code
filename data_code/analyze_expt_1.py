@@ -257,9 +257,9 @@ def plot_difference(data, path):
                 if test[3] < 1e-3:
                     power = int(np.floor(np.log10(test[3])))
                     coefficient = test[3] / (10 ** power)
-                    annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+                    annotation = r"$p = {:.3f} \times 10^{{{}}}$".format(coefficient, power)
                 else:
-                    annotation = r"$p = {:.2f}$".format(test[3])
+                    annotation = r"$p = {:.3f}$".format(test[3])
 
                 ax[m].annotate(annotation, xy=(x_pos, y_pos),
                               xytext=(0, 0), textcoords='offset points',
@@ -308,17 +308,15 @@ def plot_difference_rt(data, path):
     plate = plt.cm.get_cmap('Dark2', 8)
     plate = [plate(0), plate(5), plate(2), plate(3)]
     titles = 'Experiment 1'
-    ylabels = r'$RT_{Hard} - RT_{Easy}$ (in seconds)' 
-
-    plot_data = plot_data / 1000
+    ylabels = r'$RT_{Hard} - RT_{Easy}$ (in ms)' 
 
     avg = np.average(plot_data, axis = 0)
     se = sem(plot_data, axis = 0)
     ax.bar([0,1,2,3], avg, yerr=se, color=plate, alpha = 0.5)
+    ax.set_ylim([-1000, 2000])
     ax.set_ylabel(ylabels, fontsize=14)
     ax.set_title(titles, fontsize=12, fontweight='bold')
     ax.set_xticks([0,1,2,3], label, fontsize=14)
-    ax.set_ylim(-1, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
@@ -327,6 +325,27 @@ def plot_difference_rt(data, path):
         ax.scatter(x_position, plot_data[sub], color=plate, alpha=1,
                         s=5
                         )
+        
+    y_pos_array = np.array([3, 4, 5, 3.25, 4.5, 3.5]) * 350
+    for i, test in enumerate(paired_t_tests):
+        x_pos = 0.5 * (label.index(test[0]) + label.index(test[1]))
+        y_pos = y_pos_array[i]
+
+        # Determine if p is over power 3
+        if test[3] < 1e-3:
+            power = int(np.floor(np.log10(test[3])))
+            coefficient = test[3] / (10 ** power)
+            annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+        else:
+            annotation = r"$p = {:.2f}$".format(test[3])
+        ax.annotate(annotation, xy=(x_pos, y_pos),
+                        xytext=(0, 0), textcoords='offset points',
+                        ha='center', va='bottom', fontsize=10, color='black',
+                        )
+        y_pos = y_pos
+        ax.plot([label.index(test[0]), label.index(test[1])], [y_pos, y_pos],
+                    color='k', alpha = 0.5
+                    )
 
     plot_name = path / 'difference_rt.png'
     fig.savefig(plot_name, format='png', dpi=384, transparent=True)
@@ -506,12 +525,12 @@ def plot_foldedX(data, path):
             else:
                 stat_data[0][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['c_conf_resp'].to_numpy()
                 stat_data[1][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['ic_conf_resp'].to_numpy()
-            y1.append(np.average(stat_data[0][i][j]))
-            y2.append(np.average(stat_data[1][i][j]))
+            y1.append(np.nanmean(stat_data[0][i][j]))
+            y2.append(np.nanmean(stat_data[1][i][j]))
             y1e.append(sem(stat_data[0][i][j]))
             y2e.append(sem(stat_data[0][i][j]))
-        axim[i].errorbar([0.9, 1.9, 2.9],  y1, yerr = y1e, marker='None', c = 'green', linestyle = '-', label='Correct', alpha = 1, lw=2, ecolor='k')
-        axim[i].errorbar([1.1, 2.1, 3.1],  y2, yerr = y2e, marker='None', c = 'red', linestyle = '-', label='Error', alpha = 1, lw=2, ecolor='k')
+        axim[i].errorbar([0.9, 1.9, 2.9],  y1, yerr = y1e, marker='None', c = 'green', linestyle = '-', label='Correct', alpha = 1, lw=2, ecolor='green')
+        axim[i].errorbar([1.1, 2.1, 3.1],  y2, yerr = y2e, marker='None', c = 'red', linestyle = '-', label='Error', alpha = 1, lw=2, ecolor='red')
         axim[i].set_title(split_plot_name[i], weight='bold', fontsize=14)
         axim[i].set_xticks([1,2,3], ['Hard', 'Medium', 'Easy'], fontsize=12)
         axim[i].set_xlim([0.5, 3.5])
@@ -530,7 +549,9 @@ def plot_foldedX(data, path):
                 fit_y = stat_data[corr, feat, :, subj]
                 m, _ = fit_to_line(fit_x, fit_y)
                 m_array[corr, feat, subj] = m
-            results = ttest_1samp(m_array[corr, feat], 0, alternative='two-sided')
+            
+            slope_without_nan = m_array[corr, feat][~np.isnan(m_array[corr, feat])]
+            results = ttest_1samp(slope_without_nan, 0, alternative='two-sided')
             t_value_array[corr, feat] = results.statistic
             p_value_array[corr, feat] = results.pvalue
 
@@ -548,7 +569,6 @@ def plot_foldedX(data, path):
                 coefficient = p_value / (10 ** power)
                 annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
             axim[feat].text(3.2, y_annotate_pos[correct][feat], annotation, fontsize=8, ha='right', color=color[correct])
-
 
     plt.suptitle('Experiment 1', fontsize=24, fontweight='bold')
     axim[0].set_ylim(1.8, 3.4)
@@ -587,21 +607,21 @@ def plot_foldedX_rt(data, path):
         y2e = []
         for j in range(len(x)):
             if j == 1:
-                stat_data[0][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['c_rt'][::4].to_numpy() / 1000
-                stat_data[1][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['ic_rt'][::4].to_numpy() / 1000
+                stat_data[0][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['c_rt'][::4].to_numpy()
+                stat_data[1][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['ic_rt'][::4].to_numpy()
             else:
-                stat_data[0][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['c_rt'].to_numpy() / 1000
-                stat_data[1][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['ic_rt'].to_numpy() / 1000
+                stat_data[0][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['c_rt'].to_numpy()
+                stat_data[1][i][j] = plot_data[plot_data['exp_cond'] == split_plot[i][j]]['ic_rt'].to_numpy()
             y1.append(np.average(stat_data[0][i][j]))
             y2.append(np.average(stat_data[1][i][j]))
             y1e.append(sem(stat_data[0][i][j]))
             y2e.append(sem(stat_data[0][i][j]))
-        axim[i].errorbar([0.9, 1.9, 2.9],  y1, yerr = y1e, marker='None', c = 'green', linestyle = '-', label='Correct', alpha = 1, lw=2, ecolor='k')
-        axim[i].errorbar([1.1, 2.1, 3.1],  y2, yerr = y2e, marker='None', c = 'red', linestyle = '-', label='Error', alpha = 1, lw=2, ecolor='k')
+        axim[i].errorbar([0.9, 1.9, 2.9],  y1, yerr = y1e, marker='None', c = 'green', linestyle = '-', label='Correct', alpha = 1, lw=2, ecolor='green')
+        axim[i].errorbar([1.1, 2.1, 3.1],  y2, yerr = y2e, marker='None', c = 'red', linestyle = '-', label='Error', alpha = 1, lw=2, ecolor='red')
         axim[i].set_title(split_plot_name[i], weight='bold', fontsize=14)
         axim[i].set_xticks([1,2,3], ['Hard', 'Medium', 'Easy'], fontsize=12)
         axim[i].set_xlim([0.5, 3.5])
-        axim[i].set_ylim([0.6, 1.8])
+        axim[i].set_ylim([600, 1800])
         axim[i].set_ylabel('RT', fontsize=14)
         axim[i].spines['top'].set_visible(False)
         axim[i].spines['right'].set_visible(False)
@@ -779,18 +799,21 @@ def plot_acc_conf_slope(data, path):
         if test[3] < 1e-3:
             power = int(np.floor(np.log10(test[3])))
             coefficient = test[3] / (10 ** power)
-            annotation = r"$p = {:.2f} \times 10^{{{}}}$".format(coefficient, power)
+            annotation = r"$p = {:.3f} \times 10^{{{}}}$".format(coefficient, power)
+        else:
+            annotation = r"$p = {:.3f}$".format(test[3])
+
+        if test[3] < 0.05:
             alpha = 1
         else:
-            annotation = r"$p = {:.2f}$".format(test[3])
             alpha = 0.5
 
         plt.annotate(annotation,
                       xy=(x_pos, y_pos),
                       xytext=(0,0), textcoords='offset points',
                       ha='center', va='bottom', fontsize=12, color='black',
-                     alpha=alpha
-                     )
+                      alpha=alpha
+                      )
         y_pos = y_pos
         plt.plot([label.index(test[0]), label.index(test[1])], [y_pos, y_pos],
                  color='k', alpha = alpha
@@ -805,6 +828,19 @@ def plot_acc_conf_slope(data, path):
     plt.savefig(plot_name, format='png', dpi=384, transparent=True)
     print(plot_name)
     plt.close()
+
+
+def split_half_test(data, path):
+    half_pt = data.trial_no.max() // 2
+    first_half, second_half = data[data.trial_no <= half_pt], data[data.trial_no > half_pt]
+
+    for i, half_data in enumerate([first_half, second_half]):
+        pro_data = process(half_data)
+        pro_data = assign_condition(pro_data)
+        split_path = path / f'split_{i}'
+        split_path.mkdir(parents=True, exist_ok=True)
+        graph(pro_data, split_path)
+
 
 
 def trial_level_modelling(data, path):
@@ -850,23 +886,22 @@ def trial_level_modelling(data, path):
 def graph(data, path):
     print("\nCreating these graphs ......")
 
-    # # Figure 2a,2b
-    # plot_acc_conf_scatter(data, path)
-    # plot_acc_conf_slope(data, path)
+    # Figure 2a,2b
+    plot_acc_conf_scatter(data, path)
+    plot_acc_conf_slope(data, path)
 
-    # # Figure 2c
-    # plot_difference(data, path)
+    # Figure 2c
+    plot_difference(data, path)
 
-    # # Figure 2d
-    # plot_z_transform_difference(data, path)
+    # Figure 2d
+    plot_z_transform_difference(data, path)
 
-    # # Figure 5
-    # plot_foldedX(data, path)
-
+    # Figure 5
+    plot_foldedX(data, path)
 
     # # Supplementary (RT)
-    plot_difference_rt(data, path)
-    plot_foldedX_rt(data, path)
+    # plot_difference_rt(data, path)
+    # plot_foldedX_rt(data, path)
 
 
 def main():
@@ -893,9 +928,10 @@ def main():
         pro_data = read(out_pro_path)
         print("Processed data read from " + str(out_pro_path))
 
-    trial_level_modelling(data, stat_path)
-    pro_data = assign_condition(pro_data)
-    graph(pro_data, graph_path)
+    split_half_test(data, graph_path)
+    # trial_level_modelling(data, stat_path)
+    # pro_data = assign_condition(pro_data)
+    # graph(pro_data, graph_path)
     print("--------------------------------------------------------------------------------")
     print('ALL DONE')
 
